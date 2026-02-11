@@ -28,8 +28,17 @@ st.write("Enter patient details to predict heart disease risk.")
 # User Inputs
 # ------------------------------
 input_data = {}
-for feature in top_features:
-    input_data[feature] = st.number_input(f"Enter {feature}", value=0.0)
+input_data['thal'] = st.number_input("Thal", min_value=3, max_value=7, value=4)
+input_data['ca'] = st.number_input("Number of Major Vessels (ca)", min_value=0, max_value=4, value=0)
+input_data['cp'] = st.number_input("Chest Pain Type (cp)", min_value=0, max_value=3, value=1)
+input_data['exang'] = st.number_input("Exercise Induced Angina (exang)", min_value=0, max_value=1, value=0)
+input_data['thalach'] = st.number_input("Maximum Heart Rate Achieved (thalach)", min_value=71, max_value=202, value=150)
+input_data['oldpeak'] = st.number_input("ST Depression Induced by Exercise (oldpeak)", min_value=0.0, max_value=6.2, value=1.0, format="%.1f")
+input_data['age'] = st.number_input("Age", min_value=29, max_value=77, value=54)
+input_data['trestbps'] = st.number_input("Resting Blood Pressure (trestbps)", min_value=94, max_value=200, value=130)
+input_data['chol'] = st.number_input("Cholesterol (chol)", min_value=126, max_value=564, value=246)
+input_data['slope'] = st.number_input("Slope of Peak Exercise ST Segment (slope)", min_value=0, max_value=2, value=1)
+
 
 # ------------------------------
 # Prediction
