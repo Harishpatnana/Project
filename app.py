@@ -6,9 +6,9 @@ import os
 # ------------------------------
 # Load Model Files
 # ------------------------------
-MODEL_PATH = "heart_model.pkl"
-SCALER_PATH = "scaler.pkl"
-FEATURES_PATH = "features.pkl"
+MODEL_PATH = "heart_model (1).pkl"
+SCALER_PATH = "scaler (1).pkl"
+FEATURES_PATH = "features (1).pkl"
 
 if not (os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH) and os.path.exists(FEATURES_PATH)):
     st.error("❌ Model files not found! Put heart_model.pkl, scaler.pkl, features.pkl in the same folder.")
