@@ -32,9 +32,9 @@ if st.button("Predict"):
     # Use probability instead of direct predict
     proba = model.predict_proba(input_scaled)[0][1]
 
-    st.write("Heart Disease Probability:", round(proba, 3))
+    #st.write("Heart Disease Probability:", round(proba, 3))
 
-    if proba > 0.5:
+    if proba > 0.6:
         st.error("⚠️ High Risk of Heart Disease")
     else:
         st.success("✅ Low Risk of Heart Disease")
