@@ -20,6 +20,6 @@ if st.button("Predict"):
     probability = model.predict_proba(input_scaled)[0][1]
 
     if prediction == 1:
-        st.error(f"⚠️ High Risk (Probability: {probability:.2f})")
+        st.error("⚠️ High Risk")
     else:
-        st.success(f"✅ Low Risk (Probability: {probability:.2f})")
+        st.success("✅ Low Risk")
