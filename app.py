@@ -34,7 +34,7 @@ if st.button("Predict"):
 
     #st.write("Heart Disease Probability:", round(proba, 3))
 
-    if proba > 0.6:
+    if proba > 0.51:
         st.error("⚠️ High Risk of Heart Disease")
     else:
         st.success("✅ Low Risk of Heart Disease")
