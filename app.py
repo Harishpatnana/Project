@@ -6,7 +6,7 @@ import joblib
 # ------------------------------
 # Load Model, Scaler, Features
 # ------------------------------
-model = joblib.load("cat_model.pkl")
+model = joblib.load("heart_model.pkl")
 scaler = joblib.load("scaler.pkl")
 top_features = joblib.load("features.pkl")
 
