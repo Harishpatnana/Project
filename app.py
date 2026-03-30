@@ -26,10 +26,12 @@ exang = st.selectbox("Exercise Induced Angina (0/1)", [0, 1])
 
 if st.button("Predict"):
 
-    # IMPORTANT: Order must match your training (top_features)
-    input_data = np.array([[age, trestbps, chol, thalach, oldpeak, sex, cp, exang]])
+    # Correct order (EXAMPLE — replace with YOUR order)
+    input_data = np.array([[cp, thalach, ca, oldpeak, chol, age, exang, thal]])
 
     prediction = model.predict(input_data)
+
+    st.write("Prediction value:", prediction[0])  # DEBUG
 
     if prediction[0] == 1:
         st.error("⚠️ High Risk of Heart Attack")
