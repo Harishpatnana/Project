@@ -1,37 +1,41 @@
 import streamlit as st
-import numpy as np
+import pandas as pd
 import pickle
 
-# Load your trained model
+# Load model
 model = pickle.load(open('catboost_model.pkl', 'rb'))
 
-st.title("Heart Attack Prediction App ❤️")
+st.title("Heart Attack Risk Prediction ❤️")
 
-st.write("Enter patient details to predict risk")
+# ===== INPUTS (USE YOUR FEATURES) =====
 
-# ===== INPUT FEATURES (EDIT THESE BASED ON YOUR top_features) =====
-
-age = st.number_input("Age", min_value=1, max_value=120, value=30)
-trestbps = st.number_input("Resting Blood Pressure", value=120)
-chol = st.number_input("Cholesterol", value=200)
+cp = st.selectbox("Chest Pain Type (0–3)", [0,1,2,3])
 thalach = st.number_input("Max Heart Rate", value=150)
+ca = st.selectbox("Number of Vessels (0–3)", [0,1,2,3])
 oldpeak = st.number_input("Oldpeak", value=1.0)
+chol = st.number_input("Cholesterol", value=200)
+age = st.number_input("Age", 1, 120, 30)
+exang = st.selectbox("Exercise Angina (0/1)", [0,1])
+thal = st.selectbox("Thal (0–3)", [0,1,2,3])
 
-# Categorical inputs (adjust if needed)
-sex = st.selectbox("Sex (0 = Female, 1 = Male)", [0, 1])
-cp = st.selectbox("Chest Pain Type (0–3)", [0, 1, 2, 3])
-exang = st.selectbox("Exercise Induced Angina (0/1)", [0, 1])
-
-# ===== PREDICTION =====
+# ===== PREDICT =====
 
 if st.button("Predict"):
 
-    # IMPORTANT: Order must match your training (top_features)
-    input_data = np.array([[age, trestbps, chol, thalach, oldpeak, sex, cp, exang]])
+    input_df = pd.DataFrame([[cp, thalach, ca, oldpeak, chol, age, exang, thal]],
+                            columns=['cp','thalach','ca','oldpeak','chol','age','exang','thal'])
 
-    prediction = model.predict(input_data)
+    # 🔥 Get probability instead of class
+    prob = model.predict_proba(input_df)[0][1]   # probability of class 1
 
-    if prediction[0] == 1:
-        st.error("⚠️ High Risk of Heart Attack")
+    percentage = prob * 100
+
+    st.subheader(f"Heart Attack Risk: {percentage:.2f}%")
+
+    # Interpretation
+    if percentage < 30:
+        st.success("✅ Low Risk")
+    elif percentage < 70:
+        st.warning("⚠️ Moderate Risk")
     else:
-        st.success("✅ Low Risk of Heart Attack")
+        st.error("🚨 High Risk")
